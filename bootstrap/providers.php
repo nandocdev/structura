@@ -1,6 +1,7 @@
 <?php
 
 use App\Modules\CoreModule\Providers\CoreModuleServiceProvider;
+use App\Modules\TaskModule\Providers\TaskModuleServiceProvider;
 use App\Modules\UserModule\Providers\UserModuleServiceProvider;
 use App\Providers\AppServiceProvider;
 use App\Providers\FortifyServiceProvider;
@@ -12,4 +13,5 @@ return [
     HorizonServiceProvider::class,
     CoreModuleServiceProvider::class,
     UserModuleServiceProvider::class,
+    TaskModuleServiceProvider::class,
 ];

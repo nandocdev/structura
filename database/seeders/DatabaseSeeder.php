@@ -5,19 +5,27 @@ namespace Database\Seeders;
 use App\Modules\UserModule\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Role;
 
-class DatabaseSeeder extends Seeder {
+final class DatabaseSeeder extends Seeder
+{
     use WithoutModelEvents;
 
-    /**
-     * Seed the application's database.
-     */
-    public function run(): void {
-        // User::factory(10)->create();
+    public function run(): void
+    {
+        // Roles base (Spatie Permission)
+        $adminRole = Role::firstOrCreate(['name' => 'admin']);
+        Role::firstOrCreate(['name' => 'user']);
 
-        User::factory()->create([
+        $user = User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
+        ]);
+
+        $user->assignRole($adminRole);
+
+        $this->call([
+            TaskSeeder::class,
         ]);
     }
 }
