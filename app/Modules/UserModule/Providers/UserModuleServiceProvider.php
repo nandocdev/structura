@@ -2,6 +2,9 @@
 
 namespace App\Modules\UserModule\Providers;
 
+use App\Modules\UserModule\Models\User;
+use App\Modules\UserModule\Policies\UserPolicy;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
 class UserModuleServiceProvider extends ServiceProvider
@@ -19,12 +22,11 @@ class UserModuleServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // Register views for the module
         $this->loadViewsFrom(
             resource_path('views'),
             'user-module'
         );
 
-        // Register migrations, routes, etc. as needed
+        Gate::policy(User::class, UserPolicy::class);
     }
 }
