@@ -4,29 +4,26 @@ Aplicación Laravel estructurada bajo una arquitectura **Monolito Modular**, ori
 
 ## Estado del proyecto
 
-La base de la aplicación ya quedó preparada para evolucionar a una arquitectura modular con un primer módulo núcleo activo:
+Base modular operativa (P0/P1/P2):
 
 ```text
-app/
-├── Modules/
-│   └── CoreModule/
-│       ├── Actions/
-│       ├── Models/
-│       ├── Providers/
-│       └── Support/
+app/Modules/
+├── CoreModule/            # Infra compartida
+├── UserModule/            # Auth + FindUser::run() como contrato inter-módulo
+└── TaskModule/            # Plantilla CRUD copiable (Actions/Data/Models/Policies/Livewire/Tests)
 ```
+
+- `php artisan make:module {Name}` → scaffolding + registro en `bootstrap/providers.php`
+- API versionada `GET /api/v1/tasks` (Sanctum + throttle, Resources, FormRequests)
+- Eventos `TaskCreated/Updated/Deleted` → `LogTaskActivity` + `QueueTaskMetrics` (queue `metrics`)
+- Horizon `supervisor-1`/`supervisor-metrics` + `horizon:snapshot` cada 5m, `pulse:check` cada 1m
+- Guardrails: `tests/Feature/ArchitectureGuardTest.php` + `PerformanceGuardTest.php` (N+1 ≤4 queries)
 
 ## Stack
 
-* PHP 8.3+
-* Laravel
-* PostgreSQL
-* Livewire
-* Flux UI
-* Tailwind CSS
-* Redis
-* Pest / PHPUnit
-* Vite
+- PHP 8.3+ (CI 8.4) / Laravel 13 / Livewire 4 / Flux UI 2 / Tailwind 4 / Vite + vite-plus
+- SQLite dev (`database/database.sqlite`, `sqlite :memory:` en tests) / PostgreSQL opcional `docker-compose.yml` + Redis (predis)
+- Pest 5 / Pint / Larastan lvl7 / Horizon / Pulse
 
 ## Arquitectura
 
@@ -312,11 +309,11 @@ SchedulingModule/
 
 El modelo debe contener:
 
-* Relaciones.
-* Casts.
-* Scopes simples.
-* Configuración Eloquent.
-* Reglas directamente relacionadas con la entidad.
+- Relaciones.
+- Casts.
+- Scopes simples.
+- Configuración Eloquent.
+- Reglas directamente relacionadas con la entidad.
 
 La lógica de procesos complejos debe permanecer fuera del modelo.
 
@@ -459,11 +456,11 @@ Database
 
 Evitar:
 
-* N+1 queries.
-* Consultas innecesarias.
-* `SELECT *` cuando una consulta masiva requiere pocas columnas.
-* Consultas repetidas dentro de loops.
-* Eager loading indiscriminado.
+- N+1 queries.
+- Consultas innecesarias.
+- `SELECT *` cuando una consulta masiva requiere pocas columnas.
+- Consultas repetidas dentro de loops.
+- Eager loading indiscriminado.
 
 Medir antes de optimizar.
 
@@ -473,26 +470,26 @@ Medir antes de optimizar.
 
 ### DO
 
-* Mantener las funcionalidades dentro de su módulo.
-* Definir límites claros.
-* Usar Laravel de forma idiomática.
-* Aprovechar Eloquent, Policies, Events, Jobs, Notifications, etc.
-* Mantener Actions pequeñas y enfocadas.
-* Escribir código fácil de eliminar.
-* Preferir composición sobre jerarquías innecesarias.
-* Revisar consultas SQL generadas en operaciones críticas.
+- Mantener las funcionalidades dentro de su módulo.
+- Definir límites claros.
+- Usar Laravel de forma idiomática.
+- Aprovechar Eloquent, Policies, Events, Jobs, Notifications, etc.
+- Mantener Actions pequeñas y enfocadas.
+- Escribir código fácil de eliminar.
+- Preferir composición sobre jerarquías innecesarias.
+- Revisar consultas SQL generadas en operaciones críticas.
 
 ### DON'T
 
-* Crear microservicios prematuramente.
-* Crear interfaces para cada clase.
-* Crear repositories para ocultar Eloquent sin una razón real.
-* Crear DTOs para simples arrays sin necesidad.
-* Crear múltiples capas que solamente delegan llamadas.
-* Compartir modelos entre módulos indiscriminadamente.
-* Acceder directamente a tablas pertenecientes a otros módulos.
-* Crear un `Helpers.php` gigante.
-* Convertir `app/Services` en un cajón de sastre.
+- Crear microservicios prematuramente.
+- Crear interfaces para cada clase.
+- Crear repositories para ocultar Eloquent sin una razón real.
+- Crear DTOs para simples arrays sin necesidad.
+- Crear múltiples capas que solamente delegan llamadas.
+- Compartir modelos entre módulos indiscriminadamente.
+- Acceder directamente a tablas pertenecientes a otros módulos.
+- Crear un `Helpers.php` gigante.
+- Convertir `app/Services` en un cajón de sastre.
 
 ---
 
@@ -575,12 +572,12 @@ Este proyecto utiliza **Monolito Modular porque es suficiente**.
 
 La arquitectura debe facilitar:
 
-* Desarrollo.
-* Mantenimiento.
-* Testing.
-* Evolución.
-* Deploy.
-* Debugging.
+- Desarrollo.
+- Mantenimiento.
+- Testing.
+- Evolución.
+- Deploy.
+- Debugging.
 
 La complejidad arquitectónica debe justificarse por un problema real.
 
