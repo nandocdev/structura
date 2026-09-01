@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -e
+
+echo "→ pint --dirty --test"
+vendor/bin/pint --dirty --test --format agent
+
+# Para gate estricto local: descomenta (pesado)
+# echo "→ phpstan"
+# vendor/bin/phpstan analyse --error-format=table --no-progress
+
+echo "✓ pre-commit OK. Para full CI: composer ci:check"
