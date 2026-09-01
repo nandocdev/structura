@@ -3,8 +3,13 @@
 namespace Tests\Feature\UserModule\Livewire\Components;
 
 use App\Modules\UserModule\Livewire\Components\BadgeStatus;
+use App\Modules\UserModule\Livewire\Components\BreadcrumbsNav;
+use App\Modules\UserModule\Livewire\Components\Callout;
+use App\Modules\UserModule\Livewire\Components\Card;
 use App\Modules\UserModule\Livewire\Components\CheckboxField;
+use App\Modules\UserModule\Livewire\Components\PaginationNav;
 use App\Modules\UserModule\Livewire\Components\SelectField;
+use App\Modules\UserModule\Livewire\Components\SkeletonLoader;
 use App\Modules\UserModule\Livewire\Components\SwitchField;
 use App\Modules\UserModule\Livewire\Components\TableList;
 use Livewire\Livewire;
@@ -182,5 +187,136 @@ class FluxComponentsTest extends TestCase
             'emptyMessage' => 'No users found',
         ])
             ->assertSee('No users found');
+    }
+
+    /**
+     * Test Card component renders
+     */
+    public function test_card_renders(): void
+    {
+        Livewire::test(Card::class, [
+            'title' => 'Dashboard Widget',
+            'description' => 'Main statistics',
+        ])
+            ->assertSee('Dashboard Widget')
+            ->assertSee('Main statistics');
+    }
+
+    /**
+     * Test Card with custom padding
+     */
+    public function test_card_custom_padding(): void
+    {
+        Livewire::test(Card::class, [
+            'title' => 'Test Card',
+            'padding' => 'lg',
+            'padded' => true,
+        ])
+            ->assertSet('padding', 'lg')
+            ->assertSet('padded', true);
+    }
+
+    /**
+     * Test Callout component renders
+     */
+    public function test_callout_renders(): void
+    {
+        Livewire::test(Callout::class, [
+            'message' => 'This is an info message',
+            'variant' => 'info',
+        ])
+            ->assertSee('This is an info message');
+    }
+
+    /**
+     * Test Callout with all variants
+     */
+    public function test_callout_variants(): void
+    {
+        $variants = ['info', 'success', 'warning', 'danger'];
+
+        foreach ($variants as $variant) {
+            Livewire::test(Callout::class, [
+                'message' => 'Test message',
+                'variant' => $variant,
+            ])
+                ->assertSee('Test message');
+        }
+    }
+
+    /**
+     * Test Callout dismissible
+     */
+    public function test_callout_dismissible(): void
+    {
+        Livewire::test(Callout::class, [
+            'message' => 'Dismissible alert',
+            'dismissible' => true,
+        ])
+            ->call('dismiss')
+            ->assertSet('show', false);
+    }
+
+    /**
+     * Test SkeletonLoader renders
+     */
+    public function test_skeleton_loader_renders(): void
+    {
+        Livewire::test(SkeletonLoader::class, [
+            'count' => 3,
+            'height' => '12',
+        ])
+            ->assertSee('animate-pulse');
+    }
+
+    /**
+     * Test SkeletonLoader without animation
+     */
+    public function test_skeleton_loader_no_animation(): void
+    {
+        Livewire::test(SkeletonLoader::class, [
+            'count' => 1,
+            'animated' => false,
+        ])
+            ->assertSet('animated', false);
+    }
+
+    /**
+     * Test BreadcrumbsNav renders
+     */
+    public function test_breadcrumbs_nav_renders(): void
+    {
+        Livewire::test(BreadcrumbsNav::class, [
+            'breadcrumbs' => [
+                ['label' => 'Home', 'href' => '/', 'active' => false],
+                ['label' => 'Users', 'href' => '/users', 'active' => false],
+                ['label' => 'Profile', 'active' => true],
+            ],
+        ])
+            ->assertSee('Home')
+            ->assertSee('Users')
+            ->assertSee('Profile');
+    }
+
+    /**
+     * Test BreadcrumbsNav empty state
+     */
+    public function test_breadcrumbs_nav_empty(): void
+    {
+        Livewire::test(BreadcrumbsNav::class, [
+            'breadcrumbs' => [],
+        ])
+            ->assertDontSee('Home');
+    }
+
+    /**
+     * Test PaginationNav renders
+     */
+    public function test_pagination_nav_renders(): void
+    {
+        Livewire::test(PaginationNav::class, [
+            'paginator' => null,
+        ])
+            ->assertViewIs('livewire.user-module.components.pagination-nav');
     }
 }

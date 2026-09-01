@@ -27,17 +27,17 @@
 
 ### Propiedades
 
-| Propiedad | Tipo | Descripción |
-|-----------|------|-------------|
-| `label` | string | Etiqueta del campo |
-| `model` | string | Nombre de la propiedad a vincular |
-| `modelValue` | mixed | Valor actual |
-| `placeholder` | string | Texto de placeholder |
-| `options` | array | Array `value => label` |
-| `description` | string | Descripción debajo del select |
-| `disabled` | bool | Deshabilitar el campo |
-| `required` | bool | Campo requerido |
-| `errorKey` | string | Clave de error (por defecto = model) |
+| Propiedad     | Tipo   | Descripción                          |
+| ------------- | ------ | ------------------------------------ |
+| `label`       | string | Etiqueta del campo                   |
+| `model`       | string | Nombre de la propiedad a vincular    |
+| `modelValue`  | mixed  | Valor actual                         |
+| `placeholder` | string | Texto de placeholder                 |
+| `options`     | array  | Array `value => label`               |
+| `description` | string | Descripción debajo del select        |
+| `disabled`    | bool   | Deshabilitar el campo                |
+| `required`    | bool   | Campo requerido                      |
+| `errorKey`    | string | Clave de error (por defecto = model) |
 
 ### Ejemplo Avanzado
 
@@ -73,14 +73,14 @@
 
 ### Propiedades
 
-| Propiedad | Tipo | Descripción |
-|-----------|------|-------------|
-| `label` | string | Etiqueta del checkbox |
-| `model` | string | Propiedad a vincular |
-| `modelValue` | bool | Valor actual (true/false) |
-| `description` | string | Descripción adicional |
-| `disabled` | bool | Deshabilitar |
-| `errorKey` | string | Clave de validación |
+| Propiedad     | Tipo   | Descripción               |
+| ------------- | ------ | ------------------------- |
+| `label`       | string | Etiqueta del checkbox     |
+| `model`       | string | Propiedad a vincular      |
+| `modelValue`  | bool   | Valor actual (true/false) |
+| `description` | string | Descripción adicional     |
+| `disabled`    | bool   | Deshabilitar              |
+| `errorKey`    | string | Clave de validación       |
 
 ### Ejemplo Avanzado
 
@@ -122,14 +122,14 @@
 
 ### Propiedades
 
-| Propiedad | Tipo | Descripción |
-|-----------|------|-------------|
-| `label` | string | Etiqueta del switch |
-| `model` | string | Propiedad a vincular |
-| `modelValue` | bool | Estado actual |
+| Propiedad     | Tipo   | Descripción            |
+| ------------- | ------ | ---------------------- |
+| `label`       | string | Etiqueta del switch    |
+| `model`       | string | Propiedad a vincular   |
+| `modelValue`  | bool   | Estado actual          |
 | `description` | string | Descripción contextual |
-| `disabled` | bool | Deshabilitar |
-| `errorKey` | string | Clave de validación |
+| `disabled`    | bool   | Deshabilitar           |
+| `errorKey`    | string | Clave de validación    |
 
 ### Ejemplo Avanzado (Settings de Usuario)
 
@@ -235,14 +235,14 @@
 
 ### Propiedades
 
-| Propiedad | Tipo | Descripción |
-|-----------|------|-------------|
-| `rows` | array | Filas de datos |
-| `columns` | array | Configuración de columnas |
-| `sortBy` | string | Campo de ordenamiento actual |
-| `sortDirection` | string | 'asc' o 'desc' |
-| `perPage` | int | Filas por página (defecto: 15) |
-| `emptyMessage` | string | Mensaje cuando no hay datos |
+| Propiedad       | Tipo   | Descripción                    |
+| --------------- | ------ | ------------------------------ |
+| `rows`          | array  | Filas de datos                 |
+| `columns`       | array  | Configuración de columnas      |
+| `sortBy`        | string | Campo de ordenamiento actual   |
+| `sortDirection` | string | 'asc' o 'desc'                 |
+| `perPage`       | int    | Filas por página (defecto: 15) |
+| `emptyMessage`  | string | Mensaje cuando no hay datos    |
 
 ### Configuración de Columnas
 
