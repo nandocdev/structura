@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\User;
+use App\Modules\UserModule\Models\User;
 use Livewire\Livewire;
 
 test('profile page is displayed', function () {
