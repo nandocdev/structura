@@ -98,6 +98,7 @@ return [
 
     'waits' => [
         'redis:default' => 60,
+        'redis:metrics' => 60,
     ],
 
     /*
@@ -170,7 +171,7 @@ return [
     |
     */
 
-    'fast_termination' => false,
+    'fast_termination' => env('HORIZON_FAST_TERMINATION', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -210,6 +211,16 @@ return [
             'timeout' => 60,
             'nice' => 0,
         ],
+        'supervisor-metrics' => [
+            'connection' => 'redis',
+            'queue' => ['metrics'],
+            'balance' => 'simple',
+            'maxProcesses' => 1,
+            'memory' => 128,
+            'tries' => 1,
+            'timeout' => 60,
+            'nice' => 0,
+        ],
     ],
 
     'environments' => [
@@ -219,11 +230,17 @@ return [
                 'balanceMaxShift' => 1,
                 'balanceCooldown' => 3,
             ],
+            'supervisor-metrics' => [
+                'maxProcesses' => 2,
+            ],
         ],
 
         'local' => [
             'supervisor-1' => [
                 'maxProcesses' => 3,
+            ],
+            'supervisor-metrics' => [
+                'maxProcesses' => 1,
             ],
         ],
     ],
