@@ -2,6 +2,20 @@
 
 Aplicación Laravel estructurada bajo una arquitectura **Monolito Modular**, orientada a mantener un código organizado por dominios, con límites claros entre módulos y sin introducir complejidad innecesaria.
 
+## Estado del proyecto
+
+La base de la aplicación ya quedó preparada para evolucionar a una arquitectura modular con un primer módulo núcleo activo:
+
+```text
+app/
+├── Modules/
+│   └── CoreModule/
+│       ├── Actions/
+│       ├── Models/
+│       ├── Providers/
+│       └── Support/
+```
+
 ## Stack
 
 * PHP 8.3+
