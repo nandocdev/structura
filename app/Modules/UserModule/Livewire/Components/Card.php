@@ -10,24 +10,26 @@ use Livewire\Component;
  * Proporciona un contenedor flexible para agrupar contenido
  * con soporte para headers, footers y acciones.
  */
-class Card extends Component {
-   public string $title = '';
+class Card extends Component
+{
+    public string $title = '';
 
-   public ?string $description = null;
+    public ?string $description = null;
 
-   public string $class = '';
+    public string $class = '';
 
-   public bool $padded = true;
+    public bool $padded = true;
 
-   public string $padding = 'md';
+    public string $padding = 'md';
 
-   public function render() {
-      return view('livewire.user-module.components.card', [
-         'title' => $this->title,
-         'description' => $this->description,
-         'class' => $this->class,
-         'padded' => $this->padded,
-         'padding' => $this->padding,
-      ]);
-   }
+    public function render()
+    {
+        return view('livewire.user-module.components.card', [
+            'title' => $this->title,
+            'description' => $this->description,
+            'class' => $this->class,
+            'padded' => $this->padded,
+            'padding' => $this->padding,
+        ]);
+    }
 }

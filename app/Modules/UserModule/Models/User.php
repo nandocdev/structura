@@ -31,32 +31,35 @@ use Spatie\Permission\Traits\HasRoles;
  */
 #[Fillable(['name', 'email', 'password'])]
 #[Hidden(['password', 'two_factor_secret', 'two_factor_recovery_codes', 'remember_token'])]
-class User extends Authenticatable implements PasskeyUser {
-   /** @use HasFactory<UserFactory> */
-   use HasApiTokens, HasFactory, HasRoles, Notifiable, PasskeyAuthenticatable, TwoFactorAuthenticatable;
+class User extends Authenticatable implements PasskeyUser
+{
+    /** @use HasFactory<UserFactory> */
+    use HasApiTokens, HasFactory, HasRoles, Notifiable, PasskeyAuthenticatable, TwoFactorAuthenticatable;
 
-   protected static string $factory = UserFactory::class;
+    protected static string $factory = UserFactory::class;
 
-   /**
-    * Get the attributes that should be cast.
-    *
-    * @return array<string, string>
-    */
-   protected function casts(): array {
-      return [
-         'email_verified_at' => 'datetime',
-         'password' => 'hashed',
-      ];
-   }
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'email_verified_at' => 'datetime',
+            'password' => 'hashed',
+        ];
+    }
 
-   /**
-    * Get the user's initials.
-    */
-   public function initials(): string {
-      $initials = Str::initials($this->name, true);
+    /**
+     * Get the user's initials.
+     */
+    public function initials(): string
+    {
+        $initials = Str::initials($this->name, true);
 
-      return Str::length($initials) > 1
-         ? Str::substr($initials, 0, 1) . Str::substr($initials, -1)
-         : $initials;
-   }
+        return Str::length($initials) > 1
+           ? Str::substr($initials, 0, 1).Str::substr($initials, -1)
+           : $initials;
+    }
 }
