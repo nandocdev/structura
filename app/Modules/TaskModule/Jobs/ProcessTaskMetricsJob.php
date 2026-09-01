@@ -33,7 +33,7 @@ final class ProcessTaskMetricsJob implements ShouldQueue
 
         // Pulse — ignora si no está habilitado
         try {
-            Pulse::record('task_events', $this->event)->count()->maxNorm(100);
+            Pulse::record('task_events', $this->event)->count();
         } catch (\Throwable) {
             // Pulse deshabilitado en tests o sin Redis
         }

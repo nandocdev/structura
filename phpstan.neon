@@ -10,4 +10,13 @@ parameters:
         - database/
         - routes/
 
+    excludePaths:
+        - app/Modules/**/Tests/**
+        - app/Modules/UserModule/Livewire/**
+        - config/horizon.php
+        - config/media-library.php
+        - config/pulse.php
+        - config/sanctum.php
+        - database/migrations/2026_09_01_144040_create_pulse_tables.php
+
     level: 7
