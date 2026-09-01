@@ -10,26 +10,24 @@ use Livewire\Component;
  * Proporciona esqueletos animados para mostrar mientras
  * se cargan datos (loading states).
  */
-class SkeletonLoader extends Component
-{
-    public int $count = 1;
+class SkeletonLoader extends Component {
+   public int $count = 1;
 
-    public string $height = '12';
+   public string $height = '12';
 
-    public string $width = 'full';
+   public string $width = 'full';
 
-    public bool $animated = true;
+   public bool $animated = true;
 
-    public string $class = '';
+   public string $class = '';
 
-    public function render()
-    {
-        return view('livewire.user-module.components.skeleton-loader', [
-            'count' => $this->count,
-            'height' => $this->height,
-            'width' => $this->width,
-            'animated' => $this->animated,
-            'class' => $this->class,
-        ]);
-    }
+   public function render() {
+      return view('livewire.user-module.components.skeleton-loader', [
+         'count' => $this->count,
+         'height' => $this->height,
+         'width' => $this->width,
+         'animated' => $this->animated,
+         'class' => $this->class,
+      ]);
+   }
 }
