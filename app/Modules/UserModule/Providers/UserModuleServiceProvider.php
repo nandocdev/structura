@@ -19,6 +19,12 @@ class UserModuleServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // User module boot hooks.
+        // Register views for the module
+        $this->loadViewsFrom(
+            resource_path('views'),
+            'user-module'
+        );
+
+        // Register migrations, routes, etc. as needed
     }
 }
